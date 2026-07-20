@@ -12,7 +12,10 @@ return {
 
         menu_utils.delete_old_menus()
 
-        vim.cmd "normal! \\<RightMouse>"
+        local mouse = vim.fn.getmousepos()
+        if mouse.winid == 0 or not vim.api.nvim_win_is_valid(mouse.winid) then return end
+
+        vim.cmd.exec '"normal! \\<RightMouse>"'
 
         local buf = vim.api.nvim_win_get_buf(vim.fn.getmousepos().winid)
         local options = vim.bo[buf].ft == "NvimTree" and "nvimtree" or "default"

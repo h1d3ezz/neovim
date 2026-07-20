@@ -6,8 +6,8 @@ return {
     config = function()
       require('mini.ai').setup {
         mappings = {
-          around_next = 'aa',
-          inside_next = 'ii',
+          around_next = 'an',
+          inside_next = 'in',
         },
         n_lines = 500,
       }

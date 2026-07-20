@@ -11,9 +11,11 @@ vim.api.nvim_create_autocmd({ 'FocusGained', 'TermClose', 'TermLeave' }, {
 
 -- Highlight on Yank
 vim.api.nvim_create_autocmd('TextYankPost', {
+  group = augroup 'highlight_yank',
   desc = 'Highlight when yanking text',
   callback = function() vim.hl.on_yank() end,
 })
+
 
 -- Window Resizing
 vim.api.nvim_create_autocmd({ 'VimResized' }, {
@@ -111,5 +113,8 @@ vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
 
 -- Show diagnostic float window automatically on hover
 vim.api.nvim_create_autocmd('CursorHold', {
-  callback = function() vim.diagnostic.open_float(nil, { focusable = false }) end,
+  group = augroup 'diagnostic_float',
+  callback = function()
+    vim.diagnostic.open_float(nil, { focusable = false })
+  end,
 })

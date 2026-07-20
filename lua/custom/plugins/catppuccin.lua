@@ -11,7 +11,6 @@ return {
         all = function(colors)
           local C = colors
           local transparent_bg = C.none
-
           return {
             normal = {
               a = { bg = C.blue, fg = C.mantle, gui = 'bold' },

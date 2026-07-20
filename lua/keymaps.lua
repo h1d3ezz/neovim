@@ -14,12 +14,8 @@ vim.keymap.set({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Sav
 vim.keymap.set('n', '<leader>fn', '<cmd>enew<cr>', { desc = 'New File' })
 
 -- Buffer Management
-vim.keymap.set('n', ']b', '<cmd>bnext<CR>', {
-  desc = 'Next buffer',
-})
-vim.keymap.set('n', '[b', '<cmd>bprevious<CR>', {
-  desc = 'Previous buffer',
-})
+vim.keymap.set('n', ']b', '<cmd>bnext<CR>', { desc = 'Next buffer' })
+vim.keymap.set('n', '[b', '<cmd>bprevious<CR>', { desc = 'Previous buffer' })
 vim.keymap.set('n', '<leader>bd', '<cmd>bd<CR>', { desc = 'Delete buffer' })
 vim.keymap.set('n', '<leader>bb', '<cmd>e #<CR>', { desc = 'Switch to alternate buffer' })
 
@@ -55,7 +51,8 @@ vim.keymap.set('o', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev Se
 vim.keymap.set('n', '<leader>r', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = 'Replace word cursor is on globally' })
 
 -- Delete & Paste
-vim.keymap.set({ 'n', 'v' }, 'D', [["_d]], { desc = 'Delete without yanking' })
+vim.keymap.set('n', 'D', '"_D', { desc = 'Delete to end of line without yanking' })
+vim.keymap.set('x', 'D', '"_d', { desc = 'Delete selection without yanking' })
 vim.keymap.set('x', 'p', [["_dP]], { desc = 'Paste over selection without losing yanked text' })
 
 -- Yank & Copy
@@ -111,7 +108,11 @@ end, { desc = 'Inspect Tree' })
 
 -- Map Ctrl + Left Click to open the link under the cursor
 vim.keymap.set('n', '<C-LeftMouse>', function()
-  local cursor_pos = vim.fn.getmousepos()
-  vim.api.nvim_win_set_cursor(cursor_pos.winid, { cursor_pos.line, cursor_pos.column - 1 })
-  vim.ui.open(vim.fn.expand '<cfile>')
-end, { desc = 'Open link under cursor with Ctrl+Click' })
+  local mouse = vim.fn.getmousepos()
+  if mouse.winid == 0 or not vim.api.nvim_win_is_valid(mouse.winid) then return end
+  vim.cmd.exec '"normal! \\<LeftMouse>"'
+  local target = vim.fn.expand '<cfile>'
+  if target ~= '' then vim.ui.open(target) end
+end, {
+  desc = 'Open link under cursor with Ctrl+Click',
+})
