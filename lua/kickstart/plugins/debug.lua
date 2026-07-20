@@ -72,21 +72,6 @@ return {
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
-    require('dap-go').setup {
-      delve = {
-        detached = vim.fn.has 'win32' == 0,
-      },
-    }
-
-    dap.adapters.codelldb = {
-      type = 'server',
-      port = '${port}',
-      executable = {
-        command = vim.fn.stdpath 'data' .. '/mason/bin/codelldb',
-        args = { '--port', '${port}' },
-      },
-    }
-
     dap.configurations.cpp = {
       {
         name = 'Launch file',

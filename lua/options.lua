@@ -98,8 +98,8 @@ vim.opt.shortmess:append { W = true, I = true, c = true, C = true }
 vim.opt.updatetime = 200
 
 -- Diff & Fold
-vim.opt.diffopt = 'internal,filler,closeoff,vertical,algorithm:histogram'
 vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 vim.opt.foldlevel = 99
 vim.opt.foldenable = false
 

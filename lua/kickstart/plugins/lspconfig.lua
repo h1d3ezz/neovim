@@ -24,9 +24,7 @@ return {
             vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
           end
           map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
-
           map('gra', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
-
           map('grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
@@ -70,7 +68,7 @@ return {
             '--completion-style=detailed',
             '--function-arg-placeholders',
             '--fallback-style=llvm',
-            '--query-driver=C:/Users/Vu/scoop/apps/msys2/current/mingw64/bin/g++*',
+            '--query-driver=C:/Users/Vu/scoop/apps/msys2/current/ucrt64/bin/g++*,C:/Users/Vu/scoop/apps/msys2/current/mingw64/bin/g++*',
           },
         },
 
@@ -108,7 +106,11 @@ return {
       }
 
       local ensure_installed = vim.tbl_keys(servers or {})
-      vim.list_extend(ensure_installed, {})
+      vim.list_extend(ensure_installed, {
+        'ruff',
+        'prettierd',
+        'markdownlint',
+      })
 
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 

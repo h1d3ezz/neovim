@@ -1,19 +1,25 @@
 -- Core & Config
 vim.keymap.set('n', '<leader>re', '<cmd>restart<cr>', { desc = 'Restart config :restart' })
-vim.keymap.set('n', '<leader>ev', '<cmd>e C:\\Users\\Vu\\AppData\\Local\\nvim\\init.lua<CR>', { desc = 'Edit Neovim config' })
+vim.keymap.set('n', '<leader>ev', function()
+  vim.cmd.edit {
+    args = { vim.fn.stdpath 'config' .. '/init.lua' },
+  }
+end, { desc = 'Edit Neovim config' })
 vim.keymap.set('n', '<leader>so', '<cmd>source %<CR>', { desc = 'Source current file' })
 vim.keymap.set('n', '<leader>l', '<cmd>Lazy<cr>', { desc = 'Lazy UI' })
 vim.keymap.set('n', '<leader>qq', '<cmd>qa<cr>', { desc = 'Quit All' })
 
 -- File Operations
 vim.keymap.set({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save File' })
-vim.keymap.set('n', '<leader>W', '<cmd>w !sudo tee % > /dev/null<CR>', { desc = 'Save file with sudo' })
-vim.keymap.set('n', '<leader>pv', '<cmd>Ex<CR>', { desc = 'Open file explorer' })
 vim.keymap.set('n', '<leader>fn', '<cmd>enew<cr>', { desc = 'New File' })
 
 -- Buffer Management
-vim.keymap.set('n', '<Tab>', '<cmd>bn<CR>', { desc = 'Next buffer' })
-vim.keymap.set('n', '<S-Tab>', '<cmd>bp<CR>', { desc = 'Previous buffer' })
+vim.keymap.set('n', ']b', '<cmd>bnext<CR>', {
+  desc = 'Next buffer',
+})
+vim.keymap.set('n', '[b', '<cmd>bprevious<CR>', {
+  desc = 'Previous buffer',
+})
 vim.keymap.set('n', '<leader>bd', '<cmd>bd<CR>', { desc = 'Delete buffer' })
 vim.keymap.set('n', '<leader>bb', '<cmd>e #<CR>', { desc = 'Switch to alternate buffer' })
 
@@ -78,7 +84,7 @@ vim.keymap.set('n', 'gco', 'o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>', { desc = 
 vim.keymap.set('n', 'gcO', 'O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>', { desc = 'Add Comment Above' })
 
 -- Terminal
-vim.keymap.set('n', '<leader>t', '<cmd>split | terminal<CR>', { desc = 'Open terminal in split' })
+vim.keymap.set('n', '<leader>tt', '<cmd>split | terminal<CR>', { desc = '[T]oggle terminal in split' })
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- QuickFix & Location Lists

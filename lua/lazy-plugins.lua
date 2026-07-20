@@ -23,6 +23,7 @@ require('lazy').setup({
   require 'custom.plugins.trouble',
   require 'custom.plugins.lualine',
   require 'custom.plugins.lazydev',
+  require 'custom.plugins.fidget',
 }, { ---@diagnostic disable-line: missing-fields
   ui = {
     icons = vim.g.have_nerd_font and {} or {

@@ -8,7 +8,7 @@ return {
     branch = 'main',
     init = function() vim.env.CC = 'gcc' end,
     config = function()
-      local parsers = { 'bash', 'c', 'cpp', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'regex', 'bash' }
+      local parsers = { 'bash', 'c', 'cpp', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'regex' }
       require('nvim-treesitter').install(parsers)
 
       ---@param buf integer
@@ -19,7 +19,7 @@ return {
 
         local has_indent_query = vim.treesitter.query.get(language, 'indents') ~= nil
 
-        if has_indent_query then vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()" end
+        if has_indent_query then vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()" end
       end
 
       local available_parsers = require('nvim-treesitter').get_available()

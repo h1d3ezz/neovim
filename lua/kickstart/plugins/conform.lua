@@ -38,7 +38,9 @@ return {
       -- Specify external formatters here
       formatters_by_ft = {
         cpp = { 'clang-format' },
-        c = { 'clang-format' },
+        python = { 'ruff_format' },
+        html = { 'prettierd' },
+        css = { 'prettierd' },
       },
     },
   },
