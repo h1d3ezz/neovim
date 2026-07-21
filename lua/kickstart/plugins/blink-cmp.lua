@@ -27,6 +27,18 @@ return {
     opts = {
       keymap = {
         preset = 'enter',
+        ['<Tab>'] = {
+          'select_next',
+          'snippet_forward',
+          'fallback',
+        },
+        ['<S-Tab>'] = {
+          'select_prev',
+          'snippet_backward',
+          'fallback',
+        },
+        ['<Right>'] = { 'select_and_accept', 'fallback' },
+        ['<Esc>'] = { 'cancel', 'fallback' },
       },
 
       appearance = {
@@ -34,7 +46,7 @@ return {
       },
 
       completion = {
-        list = { selection = { preselect = false } },
+        list = { selection = { preselect = true, auto_insert = false } },
         menu = {
           auto_show = function()
             local disabled = {
@@ -45,24 +57,26 @@ return {
           end,
         },
         documentation = { auto_show = true },
-        ghost_text = { enabled = false },
+        ghost_text = { enabled = true },
         accept = {
           auto_brackets = { enabled = true },
         },
+        trigger = { show_in_snippet = false },
       },
 
       cmdline = {
         enabled = true,
         keymap = {
           preset = 'inherit',
-          ['<Tab>'] = { 'accept' },
+          ['<Tab>'] = { 'select_next', 'fallback' },
+          ['<S-Tab>'] = { 'select_prev', 'fallback' },
           ['<CR>'] = { 'accept_and_enter', 'fallback' },
         },
         completion = {
           menu = {
             auto_show = function() return vim.fn.getcmdtype() == ':' end,
           },
-          ghost_text = { enabled = false },
+          ghost_text = { enabled = true },
         },
       },
 
