@@ -26,8 +26,7 @@ return {
     ---@type blink.cmp.Config
     opts = {
       keymap = {
-        preset = 'default',
-        ['<CR>'] = { 'select_and_accept', 'fallback' },
+        preset = 'enter',
       },
 
       appearance = {
@@ -35,9 +34,18 @@ return {
       },
 
       completion = {
-        menu = { auto_show = true },
+        list = { selection = { preselect = false } },
+        menu = {
+          auto_show = function()
+            local disabled = {
+              markdown = true,
+              text = true,
+            }
+            return not disabled[vim.bo.filetype]
+          end,
+        },
         documentation = { auto_show = true },
-        ghost_text = { enabled = true },
+        ghost_text = { enabled = false },
         accept = {
           auto_brackets = { enabled = true },
         },
@@ -45,14 +53,29 @@ return {
 
       cmdline = {
         enabled = true,
-        keymap = { preset = 'cmdline' },
+        keymap = {
+          preset = 'inherit',
+          ['<Tab>'] = { 'accept' },
+          ['<CR>'] = { 'accept_and_enter', 'fallback' },
+        },
         completion = {
-          menu = { auto_show = true },
+          menu = {
+            auto_show = function() return vim.fn.getcmdtype() == ':' end,
+          },
+          ghost_text = { enabled = false },
         },
       },
 
       sources = {
         default = { 'lsp', 'path', 'buffer', 'snippets' },
+        providers = {
+          cmdline = {
+            min_keyword_length = function(ctx)
+              if ctx.mode == 'cmdline' and string.find(ctx.line, ' ') == nil then return 3 end
+              return 0
+            end,
+          },
+        },
       },
 
       snippets = { preset = 'luasnip' },
