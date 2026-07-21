@@ -8,6 +8,7 @@ return {
     lint.linters_by_ft = {
       markdown = { 'markdownlint' },
       cpp = { 'cppcheck' },
+      python = { 'ruff' },
     }
 
     lint.linters.cppcheck.args = {

@@ -8,7 +8,7 @@ return {
     branch = 'main',
     init = function() vim.env.CC = 'gcc' end,
     config = function()
-      local parsers = { 'bash', 'c', 'cpp', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'regex' }
+      local parsers = { 'bash', 'c', 'cpp', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'regex', 'python' }
       require('nvim-treesitter').install(parsers)
 
       ---@param buf integer

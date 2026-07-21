@@ -7,6 +7,7 @@ return {
     'nvim-neotest/nvim-nio',
     'mason-org/mason.nvim',
     'jay-babu/mason-nvim-dap.nvim',
+    'mfussenegger/nvim-dap-python',
   },
   keys = {
     { '<F5>', function() require('dap').continue() end, desc = 'Debug: Start/Continue' },
@@ -27,8 +28,11 @@ return {
       ensure_installed = {
         'delve',
         'codelldb',
+        'python',
       },
     }
+
+    require('dap-python').setup 'debugpy-adapter'
 
     ---@diagnostic disable-next-line: missing-fields
     dapui.setup {

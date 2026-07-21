@@ -72,6 +72,19 @@ return {
           },
         },
 
+        basedpyright = {
+          settings = {
+            basedpyright = {
+              analysis = {
+                typeCheckingMode = 'standard',
+                diagnosticMode = 'openFilesOnly',
+                autoImportCompletions = true,
+                useLibraryCodeForTypes = true,
+              },
+            },
+          },
+        },
+
         stylua = {},
 
         lua_ls = {
@@ -108,6 +121,7 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'clang-format',
+        'ruff',
       })
 
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
